@@ -5,7 +5,7 @@ import { userModel } from "../../../DB/models";
 import { IAuthRequest, IUser } from "../../../Types/types";
 import { compareSync, hash } from "bcrypt";
 import { generateToken } from "../../../Utiles";
-import { v4 as uuid } from "uuid";
+
 
 class AuthService {
     private User = new DatabaseService<IUser>(userModel)
@@ -38,13 +38,15 @@ class AuthService {
             return next(new Error("Invalid credentials" , {cause:401}))
         }
         
-        const token = generateToken({id:user._id},process.env.JWT_SECRET as string,{expiresIn:"1d"  , jwtid:uuid()})
+        const token = generateToken({id:user._id},process.env.JWT_SECRET as string,{expiresIn:"1d"  })
         return res.json({message:"User signed in successfully" , token})
     }
     
     GetProfile = async (req:IAuthRequest,res:Response,next:NextFunction)=>{
         const user = await this.User.findById(req.authUser?._id)
-        
+        if(!user){
+            return next(new Error("please login first" , {cause:404}))
+        }
         return res.json({message:"User profile fetched successfully" , user})
     }
 }
