@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.19.0",
     "mongoose": "^8.18.1",
+    "serverless-http": "^4.0.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
