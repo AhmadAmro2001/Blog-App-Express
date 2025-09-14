@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm install && tsc",
     "build:watch": "tsc --watch",
     "start:prod": "node .",
     "start:dev": "concurrently \"npm run build:watch\" \"nodemon .\""
@@ -19,6 +19,7 @@
     "express": "^5.1.0",
     "joi": "^18.0.1",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.19.0",
     "mongoose": "^8.18.1",
     "uuid": "^13.0.0"
   },
